@@ -2,7 +2,6 @@ import os
 from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 import time
-from barixSerial import pySerialComm
 from dotenv import load_dotenv
 import requests
 
@@ -14,7 +13,7 @@ auth = os.getenv('AUTH')
 device = os.getenv('DEVICE')
 data = {'auth_key': auth, 'id': device}
 
-def writeData(temperature, humidity): # writes data to InfluxDB
+def writeData(temperature, humidity): #writes data to InfluxDB
     bucket = "tempHum"
     client = InfluxDBClient(url=influxUrl, org="BStuff")
     write_api = client.write_api(write_options=SYNCHRONOUS)
