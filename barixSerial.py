@@ -1,6 +1,7 @@
 import serial
 import threading
 
+
 class pySerialComm:
     LOCK = threading.Lock()
 
