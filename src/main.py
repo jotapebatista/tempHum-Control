@@ -12,6 +12,7 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 
 
 # Setup logging
+#LOG_FILE = "logs/app.log"
 LOG_FILE = "../logs/app.log"
 
 try:
@@ -33,6 +34,10 @@ try:
             "": {
                 "level": "INFO",
                 "handlers": ["file_handler"]
+            },
+            "": {
+                "level": "ERROR",
+                "handlers": ["file_handler"]
             }
         },
         "formatters": {
@@ -50,8 +55,7 @@ except OSError as e:
         print(f"Error initializing logging: {e}")
 
 # Setup configuration
-CONFIG_FILE = "config/config.json"
-DEFAULT_CONFIG_FILE = "../config/default.config.json"
+CONFIG_FILE = "../config/config.json"
 DEFAULT_CONFIG = {
     "influxdb": {
         "url": "[IFLUXDB_URL]",
@@ -81,7 +85,7 @@ if os.path.exists(CONFIG_FILE):
             config = json.load(config_file)
     except (FileNotFoundError, json.JSONDecodeError):
         logger.exception(f"Error loading configuration file: {CONFIG_FILE}")
-        raise Exception("Error loading configuration file")
+        raise Exception("Error loading configuration file.")
 else:
     # Create a new configuration file with default values
     try:
@@ -90,7 +94,7 @@ else:
         config = DEFAULT_CONFIG
     except OSError as e:
         logger.exception(f"Error creating configuration file: {e}")
-        raise Exception("Error creating configuration file")
+        raise Exception("Error creating configuration file.")
 
 # Check if the required configuration variables are set
 if not all(config.values()):
@@ -100,7 +104,7 @@ if not all(config.values()):
 # Check if endpoint configuration value is valid
 if re.search(r"\[.*\]", config["influxdb"]["url"]):
     logger.error(f"Configuration cannot contain brackets.")
-    raise Exception("Configuration does not meet the requirements")
+    raise Exception("Configuration does not meet the requirements.")
 
 # InfluxDB options
 bucket = config["influxdb"]["bucket"]
