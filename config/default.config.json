@@ -1,0 +1,19 @@
+{
+    "influxdb": {
+        "url": "[IFLUXDB_URL]",
+        "org": "[INFLUXDB_ORG]",
+        "bucket": "[INFLUXDB_BUCKET]"
+    },
+    "device": {
+        "api_url": "[API_URL]",
+        "auth_key": "[SHELLY_AUTH_KEY]",
+        "id": "[DEVICE_ID]",
+        "max_workers": 10,
+        "max_retries": 3,
+        "delay": 3,
+        "humidity_threshold": 45
+    },
+    "plug": {
+        "url": ""
+    }
+}
