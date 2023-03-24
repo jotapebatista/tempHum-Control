@@ -30,7 +30,8 @@ The application requires a configuration file, `config.json`, which should conta
         "max_workers": 10,
         "max_retries": 3,
         "delay": 3,
-        "humidity_threshold": 45
+        "temperature_lower_threshold" : 45,
+        "temperature_upper_threshold": 55
     },
     "plug": {
         "url": ""
